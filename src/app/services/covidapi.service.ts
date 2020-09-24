@@ -10,17 +10,17 @@ export class CovidapiService {
 
     url = 'https://corona.lmao.ninja/v2'
 
-    constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) { }
 
-    async getInfoMundo(){
-        return await this.http.get<Mundo>(`${this.url}/all`)
-        .toPromise()
-        .then(mundo => {return mundo})
-    }
+  async getInfoMundo() {
+    return await this.http.get<Mundo>(`${this.url}/all`)
+    .toPromise()
+    .then(mundo => {return mundo});
+  }
 
-    getInfoPais(pais: string = 'brazil'){
-        return this.http.get<Pais>(`${this.url}/countries/${pais}`)
-        .toPromise()
-        .then(pais => {return pais})
-    }
+  getInfoPais(pais: any = 'brazil') {
+    return this.http.get<Pais>(`${this.url}/countries/${pais}`)
+    .toPromise()
+    .then(pais => {return pais})
+  }
 }

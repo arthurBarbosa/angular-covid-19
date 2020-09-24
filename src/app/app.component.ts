@@ -1,7 +1,8 @@
 import { Pais } from './models/pais.model';
 import { Mundo } from './models/mundo.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CovidapiService } from './services/covidapi.service'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -19,5 +20,16 @@ export class AppComponent implements OnInit{
   async ngOnInit() {
     this.mundo = await this.apiService.getInfoMundo();
     this.pais = await this.apiService.getInfoPais();
+  }
+
+  async trocaPais(){
+    const { value: inputPais } = await Swal.fire({
+      title: 'Informe um País:*',
+      input: 'text',
+      inputPlaceholder: 'País'
+    })
+    if(inputPais){
+      this.pais = await this.apiService.getInfoPais(inputPais)
+    }
   }
 }
